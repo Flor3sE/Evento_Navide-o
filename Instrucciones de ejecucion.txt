@@ -1,0 +1,35 @@
+Requisitos necesarios:
+Sistema operativo Linux con terminal y acceso a red local.
+Python 3 con pip y venv.
+MongoDB instalado y en ejecución en localhost:2707 con mongosh disponible para verificación.
+Cloudeflare Tunnel (cloudflared) para exponer el puerto 5000 públicamente.
+
+Instrucciones de como ejecutar el proyecto:
+1. Obtener el código y entrar al directorio del proyecto.
+git clone <urldelrepositorio>
+cd <carpetadelproyecto ---Este es por si lo tienes en una carpeta
+
+2. Crear y activar el entorno virtual de Python
+python3 -m venv venv
+source venv/bin/actívate
+
+3. Instalar las dependencias necesarias si aun no las tienes
+pip install flask pymongo qrcode[pil] reportlab requests
+
+4. Verificar que MongoDB este activo y iniciar la base de datos
+python3 mango.py
+
+5. Iniciar el servidor web Flask
+python3 app.py
+
+6. Exponer públicamente con Cloudflare Tunnel en otra terminal
+En otra terminal inica el tuner hacia el puerto 5000 y copia elurl .trycloudflare.com que te genere
+
+cloudeflared tunnel --url http://localhost:5000
+
+7. Ejecutar la prueba de carga spawner.py
+source venv/bin/actívate
+python3 spawner.py
+
+8. Puedes verificar integridad en MongoDB en otra terminal
+mongosh
