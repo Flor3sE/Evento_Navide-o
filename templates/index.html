@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditorio Plata - Concierto Navideño</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top, #2b0c14 0%, #14070b 55%, #091612 100%);
+            color: #fff8eb;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .titulo-navideno {
+            font-family: 'Cinzel', serif;
+            color: #ffd166;
+            text-shadow: 0 2px 18px rgba(255, 209, 102, 0.35);
+            letter-spacing: 1px;
+        }
+        .badge-festivo {
+            background: rgba(217, 4, 41, 0.25);
+            border: 1px solid rgba(255, 209, 102, 0.45);
+            color: #ffe5a3;
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        .glass-card {
+            background: rgba(20, 12, 16, 0.76);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 209, 102, 0.24);
+            border-radius: 18px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 209, 102, 0.55);
+        }
+        .btn-navidad {
+            background: linear-gradient(135deg, #d90429 0%, #9b111e 100%);
+            border: 1px solid rgba(255, 209, 102, 0.5);
+            color: #fff8eb;
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 13px 24px;
+            transition: all 0.25s ease;
+        }
+        .btn-navidad:hover {
+            background: linear-gradient(135deg, #ef233c 0%, #b51726 100%);
+            box-shadow: 0 6px 20px rgba(239, 35, 60, 0.45);
+            color: #ffd166;
+        }
+        .btn-pino {
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+            border: 1px solid rgba(255, 209, 102, 0.35);
+            color: #fff8eb;
+            font-weight: 600;
+        }
+        .btn-pino:hover {
+            background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+            color: #ffd166;
+        }
+        .progress {
+            background-color: rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 209, 102, 0.2);
+        }
+        .progress-bar-dorado {
+            background: linear-gradient(90deg, #2e7d32 0%, #ffd166 65%, #ef233c 100%);
+            color: #14070b;
+            font-weight: 700;
+        }
+        .form-control {
+            background-color: rgba(15, 10, 12, 0.78);
+            border: 1px solid rgba(255, 209, 102, 0.3);
+            color: #fff8eb;
+            border-radius: 12px 0 0 12px;
+        }
+        .form-control:focus {
+            background-color: rgba(15, 10, 12, 0.95);
+            color: #fff8eb;
+            border-color: #ffd166;
+            box-shadow: none;
+        }
+        .form-control::placeholder {
+            color: #cbb8a9;
+        }
+        .copo {
+            position: fixed;
+            top: -12px;
+            color: rgba(255, 255, 255, 0.65);
+            pointer-events: none;
+            z-index: 1;
+            animation: caer linear infinite;
+        }
+        @keyframes caer {
+            0% {
+                transform: translateY(-10vh) translateX(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(105vh) translateX(24px);
+                opacity: 0.15;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nieve-contenedor"></div>
+
+    <div class="container py-5 position-relative" style="z-index: 2;">
+        <div class="text-center mb-5">
+            <span class="badge-festivo mb-3">
+                <i class="fa-solid fa-snowflake me-1"></i> Temporada Decembrina • Edición Especial
+            </span>
+            <h1 class="display-4 fw-bold titulo-navideno mb-2">
+                <i class="fa-solid fa-tree me-2 text-success"></i>Auditorio Plata<i class="fa-solid fa-sleigh ms-2 text-danger"></i>
+            </h1>
+            <p class="fs-5 mb-0" style="color: #f3dfc1;">
+                <i class="fa-solid fa-music me-1 text-warning"></i> Gala y Concierto Navideño — Sistema de Boletos Oficiales
+            </p>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <h4 class="fw-semibold mb-3" style="color: #ffd166;">
+                            <i class="fa-solid fa-star me-2"></i>Aforo del Concierto Navideño
+                        </h4>
+                        <h2 class="fw-bold mb-3" id="txt-aforo" style="color: #fff8eb;">Cargando...</h2>
+                    </div>
+                    <div>
+                        <div class="progress mb-2" style="height: 24px;">
+                            <div id="barra-progreso" class="progress-bar progress-bar-dorado" role="progressbar" style="width: 0%;">0%</div>
+                        </div>
+                        <small style="color: #d6c2a5;">
+                            <i class="fa-solid fa-rotate me-1"></i> Actualización en tiempo real cada 2 segundos
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <h4 class="fw-semibold mb-2" style="color: #ffd166;">
+                            <i class="fa-solid fa-gifts me-2 text-danger"></i>Reserva tu Boleto Navideño
+                        </h4>
+                        <p style="color: #e6d5bc;">Descarga al instante tu pase oficial en PDF con código QR verificable.</p>
+                    </div>
+                    <button class="btn btn-navidad w-100 mt-3" onclick="solicitarBoletoWeb()">
+                        <i class="fa-solid fa-ticket me-2"></i>Obtener Boleto Navideño (PDF)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card p-4">
+            <h4 class="fw-semibold mb-3" style="color: #ffd166;">
+                <i class="fa-solid fa-qrcode me-2 text-success"></i>Validador de QR y Folios
+            </h4>
+            <div class="input-group mb-2">
+                <input type="number" id="input-folio" class="form-control form-control-lg" placeholder="Ingrese número de folio (ej. 1)...">
+                <button class="btn btn-pino px-4 rounded-end-3" onclick="validarFolio()">
+                    <i class="fa-solid fa-check-to-slot me-1"></i> Verificar Boleto
+                </button>
+            </div>
+            <div id="resultado-validacion" class="alert d-none mt-3 rounded-3" role="alert"></div>
+        </div>
+    </div>
+
+    <script>
+        function crearNieve() {
+            const contenedor = document.getElementById('nieve-contenedor');
+            const cantidad = 26;
+            for (let i = 0; i < cantidad; i++) {
+                const copo = document.createElement('div');
+                copo.className = 'copo';
+                copo.innerHTML = '❄';
+                copo.style.left = Math.random() * 100 + 'vw';
+                copo.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                copo.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                copo.style.animationDelay = (Math.random() * 5) + 's';
+                contenedor.appendChild(copo);
+            }
+        }
+
+        function actualizarAforo() {
+            $.get('/api/estado', function(data) {
+                let actual = data.aforo_actual;
+                let maximo = data.aforo_maximo;
+                let pct = maximo > 0 ? Math.min(100, (actual / maximo) * 100) : 0;
+                $('#txt-aforo').text(`${actual.toLocaleString()} / ${maximo.toLocaleString()}`);
+                $('#barra-progreso').css('width', `${pct}%`).text(`${pct.toFixed(1)}%`);
+            });
+        }
+
+        function solicitarBoletoWeb() {
+            $.ajax({
+                url: '/solicitar_boleto',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ hilo_id: "Usuario-Web-Navidad" }),
+                xhrFields: { responseType: 'blob' },
+                success: function(blob) {
+                    let link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = "Boleto_Navideno_Auditorio_Plata.pdf";
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    actualizarAforo();
+                },
+                error: function() {
+                    alert("No se pudo emitir el boleto (aforo lleno o error del servidor).");
+                }
+            });
+        }
+
+        function validarFolio() {
+            let folio = $('#input-folio').val();
+            if (!folio) return;
+            $.get(`/api/validar/${folio}`, function(data) {
+                let alerta = $('#resultado-validacion');
+                alerta.removeClass('d-none alert-success alert-danger');
+                if (data.valido) {
+                    alerta.addClass('alert-success').html(
+                        `<h5><i class="fa-solid fa-circle-check me-2"></i>Boleto VÁLIDO</h5>
+                        <strong>Folio:</strong> #${data.folio} | <strong>Emitido por:</strong> ${data.hilo_id} | <strong>Fecha:</strong> ${data.fecha}`
+                    );
+                } else {
+                    alerta.addClass('alert-danger').html(
+                        `<h5><i class="fa-solid fa-circle-xmark me-2"></i>Boleto INVÁLIDO</h5>El folio ingresado no existe en la base de datos.`
+                    );
+                }
+            });
+        }
+
+        crearNieve();
+        setInterval(actualizarAforo, 2000);
+        actualizarAforo();
+    </script>
+</body>
+</html>
